@@ -7,6 +7,6 @@
 
 import Foundation
 
-typealias VoidClosure = () -> Void
-typealias SingleParamVoidClosure<T> = (_ param:T) -> Void
-typealias SingleParamReturnClosure<T,R> = (_ param:T) -> R
+public typealias VoidClosure = () -> Void
+public typealias SingleParamVoidClosure<T> = (_ param:T) -> Void
+public typealias SingleParamReturnClosure<T,R> = (_ param:T) -> R

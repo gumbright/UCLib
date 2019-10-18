@@ -7,7 +7,7 @@
 
 import CoreGraphics
 
-extension CGPoint
+public extension CGPoint
 {
     func offset(x:CGFloat, y:CGFloat) -> CGPoint
     {

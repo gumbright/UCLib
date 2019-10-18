@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-extension SKPhysicsBody
+public extension SKPhysicsBody
 {
     func setToNeutral()
     {

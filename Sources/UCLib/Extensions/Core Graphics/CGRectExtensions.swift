@@ -8,7 +8,7 @@
 import CoreGraphics
 
 // MARK: Center
-extension CGRect
+public extension CGRect
 {
     func center() -> CGPoint
     {
@@ -17,7 +17,7 @@ extension CGRect
 }
 
 // MARK: Left/Right
-extension CGRect
+public extension CGRect
 {
     func lowerLeft() -> CGPoint
     {
@@ -41,7 +41,7 @@ extension CGRect
 }
 
 // MARK: Mids
-extension CGRect
+public extension CGRect
 {
     func midBottom() -> CGPoint
     {
@@ -65,7 +65,7 @@ extension CGRect
 }
 
 // MARK: Halfs
-extension CGRect
+public extension CGRect
 {
     func topHalf() -> CGRect
     {
@@ -89,7 +89,7 @@ extension CGRect
 }
 
 // MARK: Size mids
-extension CGRect
+public extension CGRect
 {
     func midHeight() -> CGFloat
     {
@@ -103,7 +103,7 @@ extension CGRect
 }
 
 // MARK: Edges
-extension CGRect
+public extension CGRect
 {
     func topEdge() -> CGRect
     {
@@ -127,7 +127,7 @@ extension CGRect
 }
     
 // MARK: Trim
-extension CGRect
+public extension CGRect
 {
     func trimBottom(_ amount:CGFloat) -> CGRect
     {
@@ -155,7 +155,7 @@ extension CGRect
 }
 
 // MARK: Grow
-extension CGRect
+public extension CGRect
 {
     func growDown(_ amount:CGFloat) -> CGRect
     {
