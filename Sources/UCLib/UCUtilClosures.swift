@@ -9,3 +9,4 @@ import Foundation
 
 typealias VoidClosure = () -> Void
 typealias SingleParamVoidClosure<T> = (_ param:T) -> Void
+typealias SingleParamReturnClosure<T,R> = (_ param:T) -> R

@@ -1,3 +1,3 @@
 # UCLib
 
-A description of this package.
+Personal utility library
