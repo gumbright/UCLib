@@ -8,7 +8,7 @@
 import UIKit
 import CoreGraphics
 
-extension UIImage
+public extension UIImage
 {
     func resizeImage(_ image:UIImage, newSize:CGSize) -> UIImage
     {
