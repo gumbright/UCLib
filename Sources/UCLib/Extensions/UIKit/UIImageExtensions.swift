@@ -10,10 +10,10 @@ import CoreGraphics
 
 public extension UIImage
 {
-    func resizeImage(_ image:UIImage, newSize:CGSize) -> UIImage
+    func resizeTo(_ newSize:CGSize) -> UIImage
     {
         UIGraphicsBeginImageContext(newSize)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
