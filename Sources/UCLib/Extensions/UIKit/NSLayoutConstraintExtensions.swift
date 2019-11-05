@@ -9,7 +9,7 @@ import UIKit
 
 // TODO: add metrics keys and parm to constrainSubviewToSuperview
 
-extension NSLayoutConstraint
+public extension NSLayoutConstraint
 {
     enum BasicInset : String
     {
