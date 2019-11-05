@@ -42,9 +42,9 @@ public extension NSLayoutConstraint
             usedMetrics.merge(fixedMetrics) { (_, newVal) -> Any in newVal}
         }
         
-        let horz = NSLayoutConstraint.constraints(withVisualFormat: "|-(leftBorder)-[subview]-(rightBorder)-|", options: NSLayoutConstraint.FormatOptions(), metrics: usedMetrics, views: views)
+        let horz = NSLayoutConstraint.constraints(withVisualFormat: "|-(leftInset)-[subview]-(rightInset)-|", options: NSLayoutConstraint.FormatOptions(), metrics: usedMetrics, views: views)
         superview.addConstraints(horz)
-        let vert = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(topBorder)-[subview]-(bottomBorder)-|", options: NSLayoutConstraint.FormatOptions(), metrics: usedMetrics, views: views)
+        let vert = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(topInset)-[subview]-(bottomInset)-|", options: NSLayoutConstraint.FormatOptions(), metrics: usedMetrics, views: views)
         superview.addConstraints(vert)
     }
 }
