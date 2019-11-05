@@ -21,7 +21,7 @@ public extension NSLayoutConstraint
     
     
     //not happy about Any
-    func constrainSubviewToSuperview(_ subview:UIView , metrics : [BasicInset:Any]? = nil)
+    static func constrainSubviewToSuperview(_ subview:UIView , metrics : [BasicInset:Any]? = nil)
     {
         guard let superview = subview.superview else {return}
         let emptyMetrics : [String:Any] = [BasicInset.topInset.rawValue:0,
