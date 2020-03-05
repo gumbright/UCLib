@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-public class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate
+public class UCFetchedResultsCoordinator : NSObject, NSFetchedResultsControllerDelegate
 {
 //    unowned var fetchedResultsTableCoordinatorDelegate:AnyObject
     var fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>?
