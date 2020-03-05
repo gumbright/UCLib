@@ -15,7 +15,7 @@ class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
     var tableView:UITableView?
     var ignoreUpdates = false
     
-    class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController, table:UITableView) -> UIXFetchedResultsCoordinator
+    class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController, table:UITableView) -> UCFetchedResultsCoordinator
     {
         return UCFetchedResultsCoordinator(controller:fetchedResultsController,table:table)
     }
