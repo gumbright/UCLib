@@ -8,14 +8,14 @@
 import UIKit
 import CoreData
 
-class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate
+public class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate
 {
 //    unowned var fetchedResultsTableCoordinatorDelegate:AnyObject
     var fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>?
     var tableView:UITableView?
     var ignoreUpdates = false
     
-    class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView) -> UCFetchedResultsCoordinator
+    public class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView) -> UCFetchedResultsCoordinator
     {
         return UCFetchedResultsCoordinator(controller:fetchedResultsController,table:table)
     }
@@ -24,7 +24,7 @@ class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedRes
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    init(controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView)
+    public init(controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView)
     {
         super.init()
         self.fetchedResultsController = controller;
@@ -35,7 +35,7 @@ class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedRes
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func controllerWillChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
+    public func controllerWillChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
     {
         if ignoreUpdates {return}
         
@@ -48,7 +48,7 @@ class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedRes
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func controllerDidChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
+    public func controllerDidChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
     {
         if ignoreUpdates {return}
         if let table = self.tableView
@@ -61,7 +61,7 @@ class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedRes
     /////////////////////////////////////////////////////
     //
     ////////////////////////////////////////////////////
-    func controller(_ controller: NSFetchedResultsController<CoreData.NSFetchRequestResult>,
+    public func controller(_ controller: NSFetchedResultsController<CoreData.NSFetchRequestResult>,
                     didChange anObject: Any,
         at indexPath: IndexPath?,
         for type: NSFetchedResultsChangeType,
