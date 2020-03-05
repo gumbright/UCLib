@@ -8,14 +8,14 @@
 import UIKit
 import CoreData
 
-class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
+class UCFetchedResultsCoordinator<NSFetchRequestResult> : NSObject, NSFetchedResultsControllerDelegate
 {
 //    unowned var fetchedResultsTableCoordinatorDelegate:AnyObject
-    var fetchedResultsController:NSFetchedResultsController?
+    var fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>?
     var tableView:UITableView?
     var ignoreUpdates = false
     
-    class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController, table:UITableView) -> UCFetchedResultsCoordinator
+    class func coordinatorForFetchedResultsController(fetchedResultsController:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView) -> UCFetchedResultsCoordinator
     {
         return UCFetchedResultsCoordinator(controller:fetchedResultsController,table:table)
     }
@@ -24,8 +24,9 @@ class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    init(controller:NSFetchedResultsController, table:UITableView)
+    init(controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>, table:UITableView)
     {
+        super.init()
         self.fetchedResultsController = controller;
         self.fetchedResultsController?.delegate = self;
         self.tableView = table;
@@ -34,7 +35,7 @@ class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func controllerWillChangeContent(controller:NSFetchedResultsController)
+    func controllerWillChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
     {
         if ignoreUpdates {return}
         
@@ -47,7 +48,7 @@ class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func controllerDidChangeContent(controller:NSFetchedResultsController)
+    func controllerDidChangeContent(_ controller:NSFetchedResultsController<CoreData.NSFetchRequestResult>)
     {
         if ignoreUpdates {return}
         if let table = self.tableView
@@ -60,113 +61,116 @@ class UCFetchedResultsCoordinator : NSFetchedResultsControllerDelegate
     /////////////////////////////////////////////////////
     //
     ////////////////////////////////////////////////////
-    func controller(controller: NSFetchedResultsController,
-        didChangeObject anObject: AnyObject,
-        atIndexPath indexPath: NSIndexPath?,
-        forChangeType type: NSFetchedResultsChangeType,
-        newIndexPath: NSIndexPath?)
+    func controller(_ controller: NSFetchedResultsController<CoreData.NSFetchRequestResult>,
+                    didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?)
     {
         if ignoreUpdates {return}
         switch (type)
         {
-        case NSFetchedResultsChangeType.Delete:
-            handleDelete(indexPath!)
+        case NSFetchedResultsChangeType.delete:
+            handleDelete(indexPath: indexPath!)
             
-        case NSFetchedResultsChangeType.Insert:
-            handleInsert(newIndexPath!)
+        case NSFetchedResultsChangeType.insert:
+            handleInsert(indexPath: newIndexPath!)
             
-        case NSFetchedResultsChangeType.Move:
-            handleMove(indexPath!,newIndexPath:newIndexPath!);
+        case NSFetchedResultsChangeType.move:
+            handleMove(oldIndexPath: indexPath!,newIndexPath:newIndexPath!);
             
-        case NSFetchedResultsChangeType.Update:
-            handleUpdate(indexPath!)
+        case NSFetchedResultsChangeType.update:
+            handleUpdate(indexPath: indexPath!)
+            
+        default:
+            break
         }
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func handleDelete(indexPath:NSIndexPath)
+    func handleDelete(indexPath:IndexPath)
     {
-        deleteTableRowAtIndexPath(indexPath)
+        deleteTableRowAtIndexPath(indexPath: indexPath)
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func handleInsert(indexPath:NSIndexPath)
+    func handleInsert(indexPath:IndexPath)
     {
-        insertTableRowAtIndexPath(indexPath)
+        insertTableRowAtIndexPath(indexPath: indexPath)
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func handleMove(oldIndexPath:NSIndexPath,  newIndexPath:NSIndexPath)
+    func handleMove(oldIndexPath:IndexPath,  newIndexPath:IndexPath)
     {
-        deleteTableRowAtIndexPath(oldIndexPath)
-        insertTableRowAtIndexPath(newIndexPath)
+        deleteTableRowAtIndexPath(indexPath: oldIndexPath)
+        insertTableRowAtIndexPath(indexPath: newIndexPath)
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func handleUpdate(indexPath:NSIndexPath)
+    func handleUpdate(indexPath:IndexPath)
     {
-        reloadTableRowAtIndexPath(indexPath)
+        reloadTableRowAtIndexPath(indexPath: indexPath)
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func deleteTableRowAtIndexPath(indexPath:NSIndexPath)
+    func deleteTableRowAtIndexPath(indexPath:IndexPath)
     {
         if let table = self.tableView
         {
-            table.deleteRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Automatic)
+            table.deleteRows(at: [indexPath], with:UITableView.RowAnimation.automatic)
         }
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func insertTableRowAtIndexPath(indexPath:NSIndexPath)
+    func insertTableRowAtIndexPath(indexPath:IndexPath)
     {
         if let table = self.tableView
         {
-            table.insertRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Automatic)
+            table.insertRows(at: [indexPath], with:UITableView.RowAnimation.automatic)
         }
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func reloadTableRowAtIndexPath(indexPath:NSIndexPath)
+    func reloadTableRowAtIndexPath(indexPath:IndexPath)
     {
         if let table = self.tableView
         {
-            table.reloadRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Automatic)
+            table.reloadRows(at: [indexPath], with:UITableView.RowAnimation.automatic)
         }
     }
     
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+    func controller(controller: NSFetchedResultsController<CoreData.NSFetchRequestResult>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
                                         atIndex sectionIndex: Int,
                                         forChangeType type: NSFetchedResultsChangeType)
     {
         if ignoreUpdates {return}
         switch (type)
         {
-            case NSFetchedResultsChangeType.Delete:
-                self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Fade)
+        case NSFetchedResultsChangeType.delete:
+            self.tableView?.deleteSections(IndexSet(integer: sectionIndex), with: UITableView.RowAnimation.fade)
             
-            case NSFetchedResultsChangeType.Insert:
-                self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation:UITableViewRowAnimation.Automatic);
+        case NSFetchedResultsChangeType.insert:
+            self.tableView?.insertSections(IndexSet(integer: sectionIndex), with:UITableView.RowAnimation.automatic);
             
-            case NSFetchedResultsChangeType.Update:
-                self.tableView?.reloadSections(NSIndexSet(index: sectionIndex), withRowAnimation:UITableViewRowAnimation.Automatic);
+        case NSFetchedResultsChangeType.update:
+            self.tableView?.reloadSections(IndexSet(integer: sectionIndex), with:UITableView.RowAnimation.automatic);
             
             default:
                 break
