@@ -133,7 +133,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public @objc class func entityName() -> String?
+    @objc public class func entityName() -> String?
     {
         return nil
     }
