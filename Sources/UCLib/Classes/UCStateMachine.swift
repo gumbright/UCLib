@@ -41,7 +41,7 @@ public class UCStateMachine<T:Hashable> {
     public typealias InvalidTransitionBlock = (_ currentTag:T, _ currentState:UCState<T>, _ newTag:T) -> Void
 
     private(set) var currentState: UCState<T>?
-    private(set) var currentStateTag : T?
+    public private(set) var currentStateTag : T?
     
     private var stateMap : [T:UCState<T>] = [:]
     private var nextMap : [T : [T]] = [:]
