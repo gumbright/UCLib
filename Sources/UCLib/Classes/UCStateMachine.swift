@@ -108,7 +108,7 @@ public class UCStateMachine<T:Hashable> {
             
             if (invalidTransitionIsFatal)
             {
-                fatalError("invalid transition from \(currentStateTag ?? "no state") to \(nextStateTag)")
+                fatalError("invalid transition from \(String(describing: currentStateTag)) to \(nextStateTag)")
             }
             return false
         }
