@@ -90,7 +90,7 @@ public class UCStateMachine<T:Hashable> {
         
         if (verbose)
         {
-            print("---->>> attempting transition from \(currentState?.stateName ?? "no state") to \(nextState)")
+            print("---->>> attempting transition from \(String(describing: currentStateTag)) to \(nextStateTag)")
         }
         
         if currentState == nil
