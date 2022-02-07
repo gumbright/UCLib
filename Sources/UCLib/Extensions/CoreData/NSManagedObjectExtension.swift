@@ -16,7 +16,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func allInContext<T:NSFetchRequestResult>(context:NSManagedObjectContext,predicate:NSPredicate?,sortedBy:String?,ascending:Bool = false) -> [T]
+    class func allInContext<T:NSFetchRequestResult>(context:NSManagedObjectContext,predicate:NSPredicate?,sortedBy:String?,ascending:Bool = false) -> [T]
     {
         let request = NSFetchRequest<T>(entityName: self.entityName())
         request.predicate = predicate
@@ -40,7 +40,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func firstInContext<T:NSManagedObject>(context:NSManagedObjectContext,predicate:NSPredicate?,sortedBy:String?,ascending:Bool = false) -> T?
+    class func firstInContext<T:NSManagedObject>(context:NSManagedObjectContext,predicate:NSPredicate?,sortedBy:String?,ascending:Bool = false) -> T?
     {
         let result:[T] = self.allInContext(context: context, predicate: predicate, sortedBy: sortedBy, ascending:ascending)
         if result.count > 0
@@ -56,7 +56,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func countWith(predicate:NSPredicate?, context:NSManagedObjectContext) -> Int
+    class func countWith(predicate:NSPredicate?, context:NSManagedObjectContext) -> Int
     {
         let request = NSFetchRequest<NSManagedObject>(entityName: self.entityName())
         var result = 0
@@ -78,7 +78,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func create<T:NSManagedObject>(context:NSManagedObjectContext) -> T?
+    class func create<T:NSManagedObject>(context:NSManagedObjectContext) -> T?
     {
         if let entity = self.entityDescription(context: context)
         {
@@ -93,7 +93,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func create<T:NSManagedObject>(context:NSManagedObjectContext, objectName:String) -> T?
+    class func create<T:NSManagedObject>(context:NSManagedObjectContext, objectName:String) -> T?
     {
         //if let entity = self.HWE_entityDescription(context: context)
         if let entity = NSEntityDescription.entity(forEntityName: objectName, in: context)
@@ -109,7 +109,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func entityDescription(context:NSManagedObjectContext) -> NSEntityDescription?
+    class func entityDescription(context:NSManagedObjectContext) -> NSEntityDescription?
     {
         return NSEntityDescription.entity(forEntityName: self.entityName(), in: context)
     }
@@ -117,7 +117,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public class func entityName() -> String
+    class func entityName() -> String
     {
         return String(describing:Self.self)
 //        var entityName = self.entityName()
@@ -133,7 +133,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    @objc public class func entityName() -> String?
+    @objc class func entityName() -> String?
     {
         return nil
     }
@@ -141,7 +141,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public func delete()
+    func delete()
     {
         self.deleteFromContext(context:self.managedObjectContext!)
     }
@@ -149,7 +149,7 @@ public extension NSManagedObject
     /////////////////////////////////////////////////////
     //
     /////////////////////////////////////////////////////
-    public func deleteFromContext(context:NSManagedObjectContext)
+    func deleteFromContext(context:NSManagedObjectContext)
     {
         do {
             let objInContext = try context.existingObject(with: self.objectID)
