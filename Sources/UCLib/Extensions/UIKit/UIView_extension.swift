@@ -24,7 +24,8 @@ extension UIView
     /// Returns the first constraint with the given identifier, if available.
     ///
     /// - Parameter identifier: The constraint identifier.
-    public func constraintWithIdentifier(_ identifier: String) -> NSLayoutConstraint? {
+    public func constraintWithIdentifier(_ identifier: String) -> NSLayoutConstraint?
+    {
         return self.constraints.first { $0.identifier == identifier }
     }
 }
