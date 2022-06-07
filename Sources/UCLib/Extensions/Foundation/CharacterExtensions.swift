@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Character: Codable {
+extension Character: Codable {
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let string = try container.decode(String.self)
