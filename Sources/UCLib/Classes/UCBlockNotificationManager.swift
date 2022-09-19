@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UCBlockNotificationManager
+public class UCBlockNotificationManager
 {
     var notificationHandlerObjects:[String:AnyObject] = [:]
     
@@ -20,12 +20,12 @@ class UCBlockNotificationManager
         }
     }
     
-    func addHandler(_ tag:String, handler:AnyObject )
+    public func addHandler(_ tag:String, handler:AnyObject )
     {
         self.notificationHandlerObjects[tag] = handler
     }
 
-    func handlerForTag(_ tag:String) -> AnyObject?
+    public func handlerForTag(_ tag:String) -> AnyObject?
     {
         guard !tag.isEmpty else
         {
@@ -34,12 +34,12 @@ class UCBlockNotificationManager
         return self.notificationHandlerObjects[tag]
     }
 
-    func removeHandlerForTag(_ tag:String)
+    public func removeHandlerForTag(_ tag:String)
     {
         self.notificationHandlerObjects.removeValue(forKey: tag)
     }
     
-    func clearAllHandlers()
+    public func clearAllHandlers()
     {
         for (tag,handler) in notificationHandlerObjects
         {
