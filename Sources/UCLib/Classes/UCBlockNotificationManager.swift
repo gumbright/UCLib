@@ -12,6 +12,10 @@ public class UCBlockNotificationManager
 {
     var notificationHandlerObjects:[String:AnyObject] = [:]
     
+    public init()
+    {
+    }
+
     deinit
     {
         for (_,handler) in self.notificationHandlerObjects
