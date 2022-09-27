@@ -10,7 +10,7 @@ import Foundation
 
 public class UCBlockNotificationManager
 {
-    var notificationHandlerObjects:[String:AnyObject] = [:]
+    var notificationHandlerObjects:[String:NSObjectProtocol] = [:]
     
     public init()
     {
@@ -24,12 +24,12 @@ public class UCBlockNotificationManager
         }
     }
     
-    public func addHandler(_ tag:String, handler:AnyObject )
+    public func addHandler(_ tag:String, handler:NSObjectProtocol )
     {
         self.notificationHandlerObjects[tag] = handler
     }
 
-    public func handlerForTag(_ tag:String) -> AnyObject?
+    public func handlerForTag(_ tag:String) -> NSObjectProtocol?
     {
         guard !tag.isEmpty else
         {
