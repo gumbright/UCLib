@@ -59,7 +59,7 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     private var configuration : UCTableViewModelConfiguration
     var delegate : (any UCTableViewModelDelegate)?
     
-    init(tableView: UITableView, config: UCTableViewModelConfiguration) {
+    public init(tableView: UITableView, config: UCTableViewModelConfiguration) {
         self.tableView = tableView
         self.configuration = config;
         super.init()
@@ -71,12 +71,11 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     {
         dataSource.apply(snapshot)
     }
-
-    
-    func buildSnapshot() -> Snapshot
+ 
+    public func buildSnapshot() -> Snapshot
     {
         let snapshot = Snapshot()
-        fatalError("")
+        fatalError("buildSnapshot MUST be implemented by UCTableViewModel subclass")
         return snapshot
     }
     
@@ -100,7 +99,7 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     }
     
     //This allows for relieve the cell of potentially neededing access to the model
-    func cellDataForItem(item:Item) -> CellDataItem
+    public func cellDataForItem(item:Item) -> CellDataItem
     {
         fatalError("cellDataForItem MUST be implemented by TableViewModel subclass")
     }

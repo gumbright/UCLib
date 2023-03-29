@@ -61,7 +61,7 @@ open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, Se
     private var configuration : UCCollectionViewModelConfiguration
     var delegate : UCCollectionViewModelDelegate?
     
-    init(collectionView: UICollectionView, config: UCCollectionViewModelConfiguration)
+    public init(collectionView: UICollectionView, config: UCCollectionViewModelConfiguration)
     {
         self.collectionView = collectionView
         self.configuration = config;
@@ -75,14 +75,14 @@ open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, Se
         dataSource.apply(snapshot)
     }
     
-    func buildSnapshot() -> Snapshot //NSDiffableDataSourceSnapshot<SectionType, Item>
+    public func buildSnapshot() -> Snapshot //NSDiffableDataSourceSnapshot<SectionType, Item>
     {
         let snapshot = Snapshot() //NSDiffableDataSourceSnapshot<SectionType, Item>()
         fatalError("buildSnapshot MUST be implemented by UCCollectionViewModel subclass")
         return snapshot
     }
     
-    func cellDataForItem(item:Item) -> CellDataItem
+    public func cellDataForItem(item:Item) -> CellDataItem
     {
         fatalError("cellDataForItem MUST be implemented by UCCollectionViewModel subclass")
     }
