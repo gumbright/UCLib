@@ -38,10 +38,10 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
 
     public class  UCTableViewModelConfiguration
     {
-        var cellReuseIdentifier : String = "cell"
-        var reuseDemux : ReuseDemux?
+        public var cellReuseIdentifier : String = "cell"
+        public var reuseDemux : ReuseDemux?
         
-        init (cellIdentifier : String)
+        public init (cellIdentifier : String)
         {
             cellReuseIdentifier = cellIdentifier
         }
@@ -57,9 +57,10 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     }()
     
     private var configuration : UCTableViewModelConfiguration
-    var delegate : (any UCTableViewModelDelegate)?
+    public var delegate : (any UCTableViewModelDelegate)?
     
-    public init(tableView: UITableView, config: UCTableViewModelConfiguration) {
+    public init(tableView: UITableView, config: UCTableViewModelConfiguration)
+    {
         self.tableView = tableView
         self.configuration = config;
         super.init()

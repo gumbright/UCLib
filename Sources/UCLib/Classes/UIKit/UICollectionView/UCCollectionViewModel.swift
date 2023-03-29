@@ -26,13 +26,14 @@ public protocol UCCollectionViewModelDelegate
 
 open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
 {
+    //this is a class instead of a struct for reasons I cannot recall and if I continue to not should consider changing it
     public class  UCCollectionViewModelConfiguration
     {
-        var cellReuseIdentifier : String = "cell"
-        var reuseDemux : ReuseDemux?
-        var supplementaryViewProvider : DataSource.SupplementaryViewProvider?
+        public var cellReuseIdentifier : String = "cell"
+        public var reuseDemux : ReuseDemux?
+        public var supplementaryViewProvider : DataSource.SupplementaryViewProvider?
         
-        init (cellIdentifier : String)
+        public init (cellIdentifier : String)
         {
             cellReuseIdentifier = cellIdentifier
         }
@@ -59,7 +60,7 @@ open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, Se
     }()
     
     private var configuration : UCCollectionViewModelConfiguration
-    var delegate : UCCollectionViewModelDelegate?
+    public var delegate : UCCollectionViewModelDelegate?
     
     public init(collectionView: UICollectionView, config: UCCollectionViewModelConfiguration)
     {
