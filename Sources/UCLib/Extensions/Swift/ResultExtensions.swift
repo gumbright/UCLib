@@ -8,7 +8,7 @@
 import Foundation
 
 //extension for case where func whatever() -> Result<Void,Error>
-//allows to just do return .success for success case 
+//allows to just do return .success for success case
 public extension Result where Success == Void {
     
     /// A success, storing a Success value.
