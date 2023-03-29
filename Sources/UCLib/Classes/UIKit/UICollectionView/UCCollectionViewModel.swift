@@ -26,7 +26,7 @@ public protocol UCCollectionViewModelDelegate
 
 open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
 {
-    class  UCCollectionViewModelConfiguration
+    public class  UCCollectionViewModelConfiguration
     {
         var cellReuseIdentifier : String = "cell"
         var reuseDemux : ReuseDemux?

@@ -36,7 +36,7 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     public typealias SectionType = SectionIdType
     public typealias Snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>
 
-    class  UCTableViewModelConfiguration
+    public class  UCTableViewModelConfiguration
     {
         var cellReuseIdentifier : String = "cell"
         var reuseDemux : ReuseDemux?
