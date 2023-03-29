@@ -68,12 +68,12 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         update(snapshot: snapshot)
     }
     
-    public func update(snapshot:Snapshot)
+    open func update(snapshot:Snapshot)
     {
         dataSource.apply(snapshot)
     }
  
-    public func buildSnapshot() -> Snapshot
+    open func buildSnapshot() -> Snapshot
     {
         let snapshot = Snapshot()
         fatalError("buildSnapshot MUST be implemented by UCTableViewModel subclass")
@@ -100,7 +100,7 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
     }
     
     //This allows for relieve the cell of potentially neededing access to the model
-    public func cellDataForItem(item:Item) -> CellDataItem
+    open func cellDataForItem(item:Item) -> CellDataItem
     {
         fatalError("cellDataForItem MUST be implemented by TableViewModel subclass")
     }

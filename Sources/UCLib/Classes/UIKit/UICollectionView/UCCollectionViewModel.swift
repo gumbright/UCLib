@@ -71,19 +71,19 @@ open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, Se
         update(snapshot: snapshot)
     }
     
-    public func update(snapshot : Snapshot)
+    open func update(snapshot : Snapshot)
     {
         dataSource.apply(snapshot)
     }
     
-    public func buildSnapshot() -> Snapshot //NSDiffableDataSourceSnapshot<SectionType, Item>
+    open func buildSnapshot() -> Snapshot //NSDiffableDataSourceSnapshot<SectionType, Item>
     {
         let snapshot = Snapshot() //NSDiffableDataSourceSnapshot<SectionType, Item>()
         fatalError("buildSnapshot MUST be implemented by UCCollectionViewModel subclass")
         return snapshot
     }
     
-    public func cellDataForItem(item:Item) -> CellDataItem
+    open func cellDataForItem(item:Item) -> CellDataItem
     {
         fatalError("cellDataForItem MUST be implemented by UCCollectionViewModel subclass")
     }
