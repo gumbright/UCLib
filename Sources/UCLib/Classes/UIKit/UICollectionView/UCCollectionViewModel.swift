@@ -24,8 +24,8 @@ public protocol UCCollectionViewModelDelegate
     func collectionView(_ collectionView:UICollectionView, requestedCell cell: UICollectionViewCell, index:IndexPath)
 }
 
-public class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject {
-    
+open class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
+{
     class  UCCollectionViewModelConfiguration
     {
         var cellReuseIdentifier : String = "cell"
@@ -89,7 +89,8 @@ public class UCCollectionViewModel<CellType: UICollectionViewCell & UCConsumer, 
 }
 
 extension UCCollectionViewModel {
-    private func cellProvider(_ collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? {
+    private func cellProvider(_ collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell?
+    {
         //call back to provide item & index path and get back reuse identifier
         var reuseId = configuration.cellReuseIdentifier
         if (configuration.reuseDemux != nil)

@@ -26,7 +26,7 @@ public protocol UCTableViewModelDelegate
     func tableView(_ tableView:UITableView, requestedCell cell: UITableViewCell, indexPath : IndexPath)
 }
 
-public class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
+open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
 {
     // Typealiases for our convenience
     public typealias CellDataItem = CellType.ConsumedItem
