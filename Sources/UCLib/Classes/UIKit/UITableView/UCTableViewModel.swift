@@ -60,16 +60,13 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         return dataSource
     }()
     
-    private var configuration : UCTableViewModelConfiguration
+    private var configuration : UCTableViewModelConfiguration?
     public var delegate : (any UCTableViewModelDelegate)?
     
-    public init(tableView: UITableView, config: UCTableViewModelConfiguration)
+    public init(tableView: UITableView)
     {
         self.tableView = tableView
-        self.configuration = config;
         super.init()
-        let snapshot = buildSnapshot()
-        update(snapshot: snapshot)
     }
     
     open func update(snapshot:Snapshot)
@@ -77,15 +74,9 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         dataSource.apply(snapshot)
     }
  
-    open func buildSnapshot() -> Snapshot
-    {
-        let snapshot = Snapshot()
-        fatalError("buildSnapshot MUST be implemented by UCTableViewModel subclass")
-        return snapshot
-    }
-    
     private func cellProvider(_ tableView: UITableView, indexPath: IndexPath, item: Item) -> UITableViewCell?
     {
+        guard let configuration else {fatalError("Configuration must be supplied for UCTableViewModel")}
         //call back to provide item & index path and get back reuse identifier
         var reuseId = configuration.cellReuseIdentifier
         if (configuration.reuseDemux != nil)
@@ -98,8 +89,6 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         {
             let itemData = cellDataForItem(item: item)
             cell.consume(itemData)
-            //delegate?.tableView(tableView, requestedCell: cell, indexPath : indexPath, item : Item)
-            //delegate?.doThing(item: Item)
             configuration.requestedCellCallback?(cell,itemData,indexPath)
             return cell
         }
