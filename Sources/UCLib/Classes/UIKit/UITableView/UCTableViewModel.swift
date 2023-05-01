@@ -21,9 +21,10 @@ import UIKit
 
 public protocol UCTableViewModelDelegate
 {
-    //associatedtype DataItem
-    //not overly happy that I can't pull the cell type from the model but oh well
-    func tableView(_ tableView:UITableView, requestedCell cell: UITableViewCell, indexPath : IndexPath)
+    associatedtype ItemType
+
+    func tableView(_ tableView:UITableView, requestedCell cell: UITableViewCell, indexPath : IndexPath, item : ItemType)
+    func doThing(item : ItemType)
 }
 
 open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdType : Hashable, ItemIdType : Hashable>: NSObject
@@ -38,9 +39,12 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
 
     public class  UCTableViewModelConfiguration
     {
+        public typealias RequestedCellCallback = (CellType,CellDataItem,IndexPath) -> Void
+        
         public var cellReuseIdentifier : String = "cell"
         public var reuseDemux : ReuseDemux?
-        
+        var requestedCellCallback : RequestedCellCallback?
+
         public init (cellIdentifier : String)
         {
             cellReuseIdentifier = cellIdentifier
@@ -92,8 +96,11 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         let c = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
         if let cell = c as? CellType
         {
-            cell.consume(cellDataForItem(item: item))
-            delegate?.tableView(tableView, requestedCell: cell, indexPath : indexPath)
+            let itemData = cellDataForItem(item: item)
+            cell.consume(itemData)
+            //delegate?.tableView(tableView, requestedCell: cell, indexPath : indexPath, item : Item)
+            //delegate?.doThing(item: Item)
+            configuration.requestedCellCallback?(cell,itemData,indexPath)
             return cell
         }
         return UITableViewCell()
