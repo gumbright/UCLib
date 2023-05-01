@@ -43,7 +43,7 @@ open class UCTableViewModel<CellType: UITableViewCell & UCConsumer, SectionIdTyp
         
         public var cellReuseIdentifier : String = "cell"
         public var reuseDemux : ReuseDemux?
-        var requestedCellCallback : RequestedCellCallback?
+        public var requestedCellCallback : RequestedCellCallback?
 
         public init (cellIdentifier : String)
         {
